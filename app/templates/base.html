@@ -1,0 +1,18 @@
+<html>
+	<head>
+	{% if title %}
+		<title>{{title}} - WEU</title>
+	{% else %}
+		<title>Welcome to WEU</title>
+	{% endif %}
+	</head>
+	<body>
+		<div>
+			WEU: 
+			<a href='/index'>HOME</a>
+			<a href='/login'>Login</a>
+		</div>
+		<hr>
+		{% block content %}{% endblock %}
+	</body>
+</html>
