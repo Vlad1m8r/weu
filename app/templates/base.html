@@ -1,5 +1,14 @@
 <html>
 	<head>
+		
+		<meta charset="utf-8">
+    	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 	{% if title %}
 		<title>{{title}} - WEU</title>
 	{% else %}
@@ -7,15 +16,49 @@
 	{% endif %}
 	</head>
 	<body>
-		<div>
-			WEU: 
-			<a href="{{ url_for('index')}}">HOME</a>
-			{% if current_user.is_anonymous %}
-			<a href="{{ url_for('login')}}">Login</a>
-			{% else %}
-			<a href="{{ url_for('user', username=current_user.username)}}">Profile</a>
-			<a href="{{ url_for('logout')}}">Logout</a>
-			{% endif %}
+
+		
+		<div class="container">
+			<div class="row">
+				<div class="col-sm">
+					<h1 align="center" >WEU</h1>
+				</div>
+			</div>
+			<div class="row " >
+				<div class='col-sm d-flex justify-content-center align-items-center'>
+				
+					<div class="dropdown show">
+					  <a class="btn dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+						<h4>Каталог</h4>
+					  </a>
+
+					  <div class="dropdown-menu" aria-labelledby="dropdownMenuLink" >
+						<a class="dropdown-item" href="#">Поло</a>
+						<a class="dropdown-item" href="#">Футболки</a>
+						<a class="dropdown-item" href="#">Худи</a>
+					  </div>
+					</div>				
+
+				<
+				</div>
+				
+				<div class="col-sm text-center">
+					<h3><a href="{{ url_for('index')}}">Главная</a></h3>
+					<div class='row'>
+						<div class='col-sm text-right'><button type="button" class="btn btn-primary">Мужская</button></div>
+						<div class='col-sm text-left'><button type="button" class="btn btn-primary">Женская</button></div>
+					</div>
+				</div>
+				<div class="col-sm text-right align-middle">
+					{% if current_user.is_anonymous %}
+					<a href="{{ url_for('login')}}">Войти</a>
+					{% else %}
+					<a href="{{ url_for('user', username=current_user.username)}}">Профиль</a>
+					<br>
+					<a href="{{ url_for('logout')}}">Выйти</a>
+					{% endif %}
+				</div>
+			</div>
 		</div>
 		<hr>
 		{% with messages = get_flashed_messages() %}
@@ -28,5 +71,8 @@
 		{% endif %}
 		{% endwith %}
 		{% block content %}{% endblock %}
+		
+		
+		
 	</body>
 </html>
