@@ -1,25 +1,18 @@
-{% extends "base.html" %}
+{% extends 'base.html' %}
 
 {% block content %}
-<!--	<h1>Hi, {{ current_user.username }}!</h1>-->
-<div class="container">
-		<div class="row row-centered">
-		{% for post in posts %}
-<!--		<div class='col-sm'><p>{{ post.author.username }} says: <b>{{ post.body }}</b></p></div>-->
-			<div class='col-sm d-flex justify-content-center'>
-				<div class="card text-center" style="width: 24rem;">
-					<div class="card-body">
-						<h3 class="card-title">Название(Фото) шмотки</h3>
-<!--					<h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>-->
-						<p class="card-text">Краткое описание шмота.</p>
-						<div class="row">
-							<div class="col-sm"><a href="#" class="btn btn-primary">Подробнее</a></div>
-							<div class="col-sm"><a href="#" class="btn btn-primary">Заказать</a></div>
-						</div>
-					</div>
-				</div>
-			</div>
-		{% endfor %}
-		</div>
-</div>
+    <div class="container">
+        <div class="row">
+        {% for thing in things %}
+            <div class="col">
+                <div class="card" style="width: 18rem;">
+                  <img src="{{url_for('static', filename=thing.img_code+'.jpg')}}" class="card-img-top" alt="Ошибка изображения">
+                  <div class="card-body d-flex justify-content-center">
+                    <a href="{{ url_for('thing', thing_id=thing.id) }}" class="btn btn-primary">Подробнее</a>
+                  </div>
+                </div>
+            </div>
+        {% endfor %}
+        </div>
+    </div>
 {% endblock %}

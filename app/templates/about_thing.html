@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="container">
+    <div class="row">
+        <div class="col">
+          <img style="width: 25rem;" src="{{url_for('static', filename=thing.img_code+'.jpg')}}" alt="Ошибка изображения">
+        </div>
+        <div class="col align-self-center">
+            <div class="row">
+                <p>Название - {{ thing.type }}</p>
+            </div>
+            <div class="row">
+                <p>Ткань - {{ thing.cloth }}</p>
+            </div>
+            <div class="row">
+               <p>Размер - {{ thing.size }}</p>
+            </div>
+        </div>
+    </div>
+
+        <hr>
+        <a class="d-flex justify-content-center" href="{{ url_for('index') }}">Назад</a>
+    </div>
+{% endblock %}
