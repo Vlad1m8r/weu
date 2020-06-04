@@ -7,27 +7,53 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 </head>
 <body>
-    <div class="container d-flex justify-content-center" >
-        <ul class="nav justify-content-center">
-            <li class="nav-item px-md-5">
-                <h2><a href="{{ url_for('index') }}">Главная</a></h2>
-            </li>
-            {% if current_user.is_anonymous %}
+<div class="container ">
+    <div class="flex-row justify-content-center mt-3 mb-4">
+{#        <div class="d-flex justify-content-center" >#}
+            <ul class="nav justify-content-center">
                 <li class="nav-item px-md-5">
-                <h2><a href="{{ url_for('login') }}">Войти</a></h2>
+                    <h3><a href="{{ url_for('index') }}">Главная</a></h3>
                 </li>
-            {% else %}
-                <li class="nav-item px-md-5">
-                <h2><a href="{{ url_for('user', username=current_user.username) }}">Профиль</a></h2>
-                </li>
-                <li class="nav-item px-md-5">
-                <h2><a href="{{ url_for('logout') }}">Выйти</a></h2>
-                </li>
-            {% endif %}
-        </ul>
-
+                {% if current_user.is_anonymous %}
+                    <li class="nav-item px-md-5">
+                        <h3><a href="{{ url_for('login') }}">Войти</a></h3>
+                    </li>
+                    <li>
+                        {% if session.get('cart') %}
+                            <h3><a href="{{ url_for('cart') }}">Корзина {{ session['cart']|length }}</a></h3>
+                        {% endif %}
+                    </li>
+                {% else %}
+                    <li class="nav-item px-md-5">
+                        <h3><a href="{{ url_for('user', username=current_user.username) }}">Профиль</a></h3>
+                    </li>
+                    <li class="nav-item px-md-5">
+                        <h3><a href="{{ url_for('logout') }}">Выйти</a></h3>
+                    </li>
+                    <li class="nav-item px-md-5">
+                        {% if session.get('cart') %}
+                            <h3><a href="{{ url_for('logout') }}">Корзина</a></h3>
+                        {% endif %}
+                    </li>
+                    </li>
+                    <li class="nav-item px-md-5">
+                    {% for role in current_user.roles %}
+                        {% if role == 'admin'%}
+                            <li class="nav-item px-md-5">
+                                <h3><a href="/admin">Админ</a></h3>
+                            </li>
+                        {% endif %}
+                    {% endfor %}
+                {% endif %}
+            </ul>
+{#            <hr>#}
+{#        </div>#}
     </div>
-        <hr>
     {% block content %}{% endblock %}
+</div>
+
+
+{#----------------------------------------------------#}
+{#----------------------------------------------------#}
 </body>
 </html>

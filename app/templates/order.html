@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <form action="" method="post" novalidate>
+        {{  form.hidden_tag() }}
+        <p>
+            {{ form.address.label}} <br>
+            {{ form.address(size=32) }}
+            {% for error in form.address.errors %}
+            {{ error }}
+            {% endfor %}
+        </p>
+        <p>
+            {{ form.fio.label }} <br>
+            {{ form.fio(size=32) }}
+            {% for error in form.fio.errors %}
+            {{ error }}
+            {% endfor %}
+        </p>
+        <p>
+            {{ form.mail.label }} <br>
+            {{ form.mail(size=32) }}
+            {% for error in form.mail.errors %}
+            {{ error }}
+            {% endfor %}
+        </p>
+        <p>
+            {{ form.index.label }} <br>
+            {{ form.index(size=32) }}
+            {% for error in form.index.errors %}
+            {{ error }}
+            {% endfor %}
+        </p>
+    </form>
+    <hr>
+    <a type="button" class="btn btn-secondary d-flex justify-content-center" href="#">Готово</a>
+    <hr>
+    <a type="button" class="btn btn-secondary d-flex justify-content-center" href="{{ url_for('index') }}">Назад</a>
+{% endblock %}
